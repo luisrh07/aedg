@@ -3,39 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un Mensaje para Estrella</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f7e7ce;
-            margin: 0;
-        }
-        .button-container {
-            text-align: center;
-        }
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            text-decoration: none;
-            background-color: #d1c091;
-            color: #fff;
-            border-radius: 8px;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
-        }
-        .button:hover {
-            background-color: #b8a97a;
-        }
-    </style>
+    <title>Para Mi Estrella</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="button-container">
-        <a href="carta.html" class="button">Presiona Aquí para Ver la Carta</a>
+    <div class="container">
+        <div id="envelope">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="letter-area">
+                <div id="letter">
+                    <p>Mi Estrella,</p>
+                    <p>Desde el momento en que nuestros caminos se cruzaron, sentí algo diferente, algo que nunca antes había experimentado. No se trata solo de una atracción superficial, es algo mucho más profundo. Siento cómo nuestras almas se entrelazan, como si estuvieran destinadas a encontrarse en este vasto universo. De lo que estén hechas nuestras almas, la tuya y la mía son lo mismo.</p>
+                    <p>Antes de ti, mi mundo era un caos, un torbellino de oscuridad y confusión. Tú eres la luz que ha iluminado mi camino, la calma en medio de mi tormenta. Tus ojos... en ellos encuentro un universo entero, una profundidad que me atrae y me hace querer perderme en ti para siempre.</p>
+                    <p>No sé qué deparará el futuro, pero de lo que estoy seguro es de que cada instante a tu lado es un regalo. Eres más de lo que jamás imaginé que podría desear.</p>
+                    <p class="signature">Siempre tuyo,</p>
+                    <p class="signature">Tu Luis.</p>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="animation-container"></div>
+    <script src="script.js"></script>
 </body>
 </html>
