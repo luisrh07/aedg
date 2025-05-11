@@ -38,7 +38,7 @@ body {
 }
 
 #envelope.open {
-    transform: translateY(-150px) rotateX(70deg);
+    transform: translateY(-50px) rotateX(60deg) scale(1.1); /* Modificado el translateY y scale */
 }
 
 .flap {
@@ -61,16 +61,17 @@ body {
 }
 
 #envelope.open .flap.top {
-    transform: rotateX(180deg) translateY(-10px);
+    transform: rotateX(180deg) translateY(0); /* Modificado el translateY */
 }
 
 .flap.bottom {
     bottom: 0;
     border-top: 2px solid #b8a97a;
+    transform-origin: bottom center; /* Importante para la animación */
 }
 
 #envelope.open .flap.bottom {
-    transform: translateY(100%);
+    transform: rotateX(-180deg) translateY(0); /* Modificado el translateY */
 }
 
 .letter-area {
