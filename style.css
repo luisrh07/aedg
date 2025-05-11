@@ -1,0 +1,259 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f7e7ce; /* Un color de fondo suave */
+    overflow: hidden; /* Para que las animaciones salgan del viewport si es necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed; /* Para que las animaciones se superpongan a todo */
+    pointer-events: none; /* Para poder interactuar con la carta */
+}
+
+#envelope {
+    position: relative;
+    width: 80%; /* Ajuste para pantallas más pequeñas */
+    max-width: 300px; /* Límite máximo para pantallas grandes */
+    height: auto; /* Ajuste automático de la altura */
+    aspect-ratio: 3 / 2; /* Mantiene la proporción del sobre */
+    background-color: #e9d7b0;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.8s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Para apilar los flaps verticalmente en pantallas pequeñas */
+}
+
+#envelope.open {
+    transform: translateY(-150px) rotateX(70deg);
+}
+
+.flap {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #d1c091;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    transform-origin: top center;
+    transition: transform 0.8s ease-in-out;
+}
+
+.flap.top {
+    top: 0;
+    border-bottom: 2px solid #b8a97a;
+    z-index: 2;
+}
+
+#envelope.open .flap.top {
+    transform: rotateX(180deg) translateY(-10px);
+}
+
+.flap.bottom {
+    bottom: 0;
+    border-top: 2px solid #b8a97a;
+}
+
+#envelope.open .flap.bottom {
+    transform: translateY(100%);
+}
+
+.letter-area {
+    position: absolute;
+    top: 20px; /* Ajusta según sea necesario */
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background-color: #f8f0e3;
+    border-radius: 5px;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-in-out 0.3s, transform 0.8s ease-in-out 0.3s;
+    overflow-y: auto;
+    padding: 15px;
+    text-align: center;
+}
+
+#envelope.open .letter-area {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#letter {
+    white-space: pre-line;
+    line-height: 1.6;
+    color: #333;
+    font-size: 0.9em; /* Ajuste de tamaño de fuente para legibilidad */
+}
+
+.heart {
+    position: absolute;
+    background-color: pink;
+    width: 15px; /* Ajuste de tamaño para móviles */
+    height: 15px;
+    transform: rotate(45deg);
+    animation: float 4s linear infinite, drift 5s linear infinite;
+    opacity: 0;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: pink;
+}
+
+.heart::after {
+    left: 8px;
+}
+
+.heart.blue {
+    background-color: lightskyblue;
+}
+
+.heart.blue::before,
+.heart.blue::after {
+    background-color: lightskyblue;
+}
+
+.heart.purple {
+    background-color: plum;
+}
+
+.heart.purple::before,
+.heart.purple::after {
+    background-color: plum;
+}
+
+.sunflower {
+    position: absolute;
+    border-radius: 50%;
+    background-color: yellow;
+    border: 1px solid orange; /* Ajuste del borde */
+    animation: float 6s ease-in-out infinite, spin 8s linear infinite;
+    opacity: 0;
+}
+
+.sparkle {
+    position: absolute;
+    background-color: white;
+    width: 3px; /* Ajuste de tamaño para móviles */
+    height: 3px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 2s ease-in-out infinite, drift 7s linear infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0; }
+    50% { transform: translateY(-20px) rotate(45deg) scale(1.2); opacity: 0.8; } /* Ajuste de la altura del flotado */
+}
+
+@keyframes drift {
+    0% { margin-left: -20vw; } /* Iniciar fuera de la pantalla */
+    100% { margin-left: 120vw; } /* Terminar fuera de la pantalla */
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Media queries para hacerlo responsivo */
+@media (max-width: 600px) {
+    #envelope {
+        width: 95%;
+    }
+    .letter-area {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+    .heart {
+        width: 12px;
+        height: 12px;
+    }
+    .heart::before,
+    .heart::after {
+        width: 12px;
+        height: 12px;
+        top: -6px;
+    }
+    .heart::after {
+        left: 6px;
+    }
+    .sunflower {
+        border-width: 0.5px;
+    }
+    .sparkle {
+        width: 2px;
+        height: 2px;
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(45deg) scale(1);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(-100vh) rotate(45deg) scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-150vh) rotate(45deg) scale(2);
+        opacity: 0;
+    }
+}
+@keyframes floatAndSpin {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.7;
+    }
+    80% {
+        transform: translateY(-80vh) rotate(720deg) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(1080deg) scale(1.5);
+        opacity: 0;
+    }
+}
+@keyframes twinkleAndDrift {
+    0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-30vh) translateX(50vw) scale(1.5);
+    }
+    100% {
+        transform: translateY(-60vh) translateX(100vw) scale(1);
+        opacity: 0;
+    }
+}
