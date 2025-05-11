@@ -1,103 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const envelope = document.getElementById('envelope');
-    const animationContainer = document.querySelector('.animation-container');
+const decorationsContainer = document.querySelector('.decorations');
+const numHearts = 20;
+const heartColors = ['#da70d6', '#6495ed', '#ff69b4']; // Lila, Azul, Rosa
+const numFlowers = 15;
+const numSparkles = 30;
 
-    envelope.addEventListener('click', () => {
-        envelope.classList.toggle('open');
-        if (envelope.classList.contains('open')) {
-            // Crear corazones
-            for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                const colors = ['pink', 'lightskyblue', 'plum'];
-                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                heart.style.left = `${Math.random() * 100}vw`;
-                heart.style.top = `${Math.random() * 100 + window.scrollY}px`;
-                heart.style.animationDelay = `${Math.random() * 2}s`;
-                heart.style.animationDuration = `${3 + Math.random() * 3}s`;
-                animationContainer.appendChild(heart);
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    const size = Math.random() * 15 + 10;
+    heart.style.width = `${size}px`;
+    heart.style.height = `${size}px`;
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.top = `${Math.random() * 100}vh`;
+    heart.style.animationDelay = `${Math.random() * 2}s`;
+    heart.style.backgroundColor = heartColors[Math.floor(Math.random() * heartColors.length)];
+    decorationsContainer.appendChild(heart);
 
-                heart.style.animationName = 'floatUp';
-                heart.style.animationTimingFunction = 'ease-out';
-                heart.addEventListener('animationend', () => heart.remove());
-
-                // Crear los "dos pétalos" del corazón
-                const before = document.createElement('div');
-                before.style.position = 'absolute';
-                before.style.top = '-8px';
-                before.style.left = '0';
-                before.style.width = 'inherit';
-                before.style.height = 'inherit';
-                before.style.borderRadius = '50%';
-                before.style.backgroundColor = heart.style.backgroundColor;
-                heart.appendChild(before);
-
-                const after = document.createElement('div');
-                after.style.position = 'absolute';
-                after.style.top = '-8px';
-                after.style.left = '8px';
-                after.style.width = 'inherit';
-                after.style.height = 'inherit';
-                after.style.borderRadius = '50%';
-                after.style.backgroundColor = heart.style.backgroundColor;
-                heart.appendChild(after);
-            }
-
-            // Crear girasoles
-            for (let i = 0; i < 8; i++) {
-                const sunflower = document.createElement('div');
-                sunflower.classList.add('sunflower');
-                const size = 20 + Math.random() * 30;
-                sunflower.style.width = `${size}px`;
-                sunflower.style.height = `${size}px`;
-                sunflower.style.left = `${Math.random() * 100}vw`;
-                sunflower.style.top = `${Math.random() * 100 + window.scrollY}px`;
-                sunflower.style.animationDelay = `${Math.random() * 2}s`;
-                sunflower.style.opacity = 0.7;
-                animationContainer.appendChild(sunflower);
-
-                // Crear pétalos (simplificado con múltiples círculos)
-                const numPetals = 8 + Math.floor(Math.random() * 6);
-                for (let j = 0; j < numPetals; j++) {
-                    const petal = document.createElement('div');
-                    petal.style.position = 'absolute';
-                    petal.style.width = `${size * 0.3}px`;
-                    petal.style.height = `${size * 0.3}px`;
-                    petal.style.borderRadius = '50%';
-                    petal.style.backgroundColor = 'yellow';
-                    petal.style.transformOrigin = 'center center';
-                    petal.style.transform = `rotate(${j * (360 / numPetals)}deg) translateY(${size / 2}px)`;
-                    sunflower.appendChild(petal);
-                }
-
-                // Centro del girasol
-                const center = document.createElement('div');
-                center.style.position = 'absolute';
-                center.style.width = `${size * 0.4}px`;
-                center.style.height = `${size * 0.4}px`;
-                center.style.borderRadius = '50%';
-                center.style.backgroundColor = 'brown';
-                center.style.top = `${size * 0.3}px`;
-                center.style.left = `${size * 0.3}px`;
-                sunflower.appendChild(center);
-
-                sunflower.style.animationName = 'floatAndSpin';
-                sunflower.style.animationDuration = `${8 + Math.random() * 4}s`;
-                sunflower.style.animationTimingFunction = 'ease-in-out';
-                sunflower.addEventListener('animationend', () => sunflower.remove());
-            }
-
-            // Crear brillitos
-            for (let i = 0; i < 30; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.classList.add('sparkle');
-                sparkle.style.left = `${Math.random() * 100}vw`;
-                sparkle.style.top = `${Math.random() * 100 + window.scrollY}px`;
-                sparkle.style.animationDelay = `${Math.random() * 3}s`;
-                animationContainer.appendChild(sparkle);
-                sparkle.style.animationName = 'twinkleAndDrift';
-                sparkle.style.animationDuration = `${5 + Math.random() * 3}s`;
-                sparkle.addEventListener('animationend', () => sparkle.remove());
-            }
-        }
+    // Remover el corazón después de que termine la animación para no sobrecargar el DOM
+    heart.addEventListener('animationiteration', () => {
+        heart.remove();
     });
+
+    // Volver a crear un corazón después de un tiempo aleatorio
+    setTimeout(createHeart, Math.random() * 1000 + 500);
+}
+
+function createFlower() {
+    const flowerContainer = document.createElement('div');
+    flowerContainer.classList.add('flower');
+    const xPos = Math.random() * 100;
+    const yPos = Math.random() * 100;
+    const size = Math.random() * 15 + 20;
+    flowerContainer.style.left = `${xPos}vw`;
+    flowerContainer.style.top = `${yPos}vh`;
+    flowerContainer.style.fontSize = `${size}px`;
+
+    // Puedes usar un emoji de girasol directamente o construir una flor con divs
+    const sunflowerEmoji = document.createElement('span');
+    sunflowerEmoji.textContent = '🌻';
+    flowerContainer.appendChild(sunflowerEmoji);
+
+    decorationsContainer.appendChild(flowerContainer);
+
+    // Remover la flor después de un tiempo (opcional)
+    setTimeout(() => {
+        flowerContainer.remove();
+        createFlower(); // Crear una nueva flor
+    }, Math.random() * 5000 + 3000);
+}
+
+function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    const size = Math.random() * 5 + 5;
+    sparkle.style.width = `${size}px`;
+    sparkle.style.height = `${size}px`;
+    sparkle.style.backgroundColor = 'white';
+    sparkle.style.left = `${Math.random() * 100}vw`;
+    sparkle.style.top = `${Math.random() * 100}vh`;
+    sparkle.style.animationDelay = `${Math.random() * 1.5}s`;
+    decorationsContainer.appendChild(sparkle);
+
+    setTimeout(() => {
+        sparkle.remove();
+        createSparkle();
+    }, Math.random() * 2000 + 1000);
+}
+
+// Inicializar la creación de elementos
+for (let i = 0; i < 5; i++) { // Iniciar con algunos corazones
+    createHeart();
+}
+for (let i = 0; i < 3; i++) { // Iniciar con algunas flores
+    createFlower();
+}
+for (let i = 0; i < 10; i++) { // Iniciar con algunos brillos
+    createSparkle();
+}
+
+// Para que los elementos se sigan generando indefinidamente, las funciones setTimeout dentro de cada creador se encargarán de eso.
