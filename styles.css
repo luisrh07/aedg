@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #d6b0f4;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.envelope-wrapper {
+  cursor: pointer;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.envelope {
+  position: relative;
+  width: 200px;
+  height: 130px;
+  background-color: #fff;
+  border: 2px solid #aaa;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid #fff;
+}
+
+.envelope .body {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+}
+
+.envelope .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: #7b1fa2;
+  text-align: center;
+}
+
+.envelope .hearts {
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.letter {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  color: #333;
+  z-index: 1;
+}
+
+.letter h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.letter p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.floating-heart,
+.sparkle,
+.sunflower {
+  position: absolute;
+  pointer-events: none;
+  animation: floatUp 10s linear infinite;
+  z-index: 0;
+}
+
+.floating-heart {
+  width: 20px;
+  height: 20px;
+}
+
+.sparkle {
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, white, transparent);
+  border-radius: 50%;
+}
+
+.sunflower {
+  width: 30px;
+  height: 30px;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .letter {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .letter h1 {
+    font-size: 1.5rem;
+  }
+
+  .letter p {
+    font-size: 1rem;
+  }
+}
