@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('assets/fondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  color: #fff;
+}
+.container {
+  text-align: center;
+  padding: 2rem;
+}
+.letter-wrapper {
+  margin-top: 3rem;
+}
+.letter {
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  display: none;
+}
+button {
+  background: #a18cd1;
+  border: none;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 1rem;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: #7f6db1;
+}
+.music-player {
+  margin-top: 2rem;
+}
+.lsm-icon img {
+  width: 80px;
+  margin-top: 2rem;
+}
