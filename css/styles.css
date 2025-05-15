@@ -1,0 +1,92 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: linear-gradient(135deg, #fdf0ff, #f9e0ff);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  height: 100vh;
+  position: relative;
+}
+.container {
+  text-align: center;
+  padding-top: 50px;
+}
+.envelope {
+  width: 200px;
+  margin: 0 auto;
+  transition: transform 0.5s ease;
+}
+.btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #a55eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: #7c3aed;
+}
+.card {
+  display: none;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  font-size: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
+}
+.card h1 {
+  font-family: 'Great Vibes', cursive;
+  color: #6a0dad;
+  margin-bottom: 20px;
+}
+.flowers, .hearts, .sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.flower, .heart, .sparkle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+.flower {
+  background: url('https://i.ibb.co/V3WYFb2/flower-purple.png') no-repeat center center / contain;
+  animation: bloom 3s forwards;
+}
+.heart {
+  background: url('https://i.ibb.co/Y34DB4n/heart.png') no-repeat center center / contain;
+  animation: floatUp 5s linear forwards;
+}
+.sparkle {
+  background: url('https://i.ibb.co/zSbf0H1/sparkle.png') no-repeat center center / contain;
+  animation: fadeInOut 2s infinite;
+}
+@keyframes bloom {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
